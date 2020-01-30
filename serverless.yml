@@ -1,0 +1,19 @@
+service:
+  name: myService
+
+frameworkVersion: ">=1.0.0 <2.0.0"
+provider:
+  name: aws
+  region: us-west-1
+  runtime: nodejs12.x
+  memorySize: 2048
+
+functions:
+  transcode:
+    handler: src/handler.ffmpeg
+    layers:
+      - arn:aws:lambda:us-west-1:577033047846:layer:ffmpeg:1
+    events:
+      - http:
+          path: test
+          method: get
